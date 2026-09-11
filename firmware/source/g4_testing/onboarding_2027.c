@@ -6,14 +6,18 @@
 #include "common/phal_G4/gpio/gpio.h"
 #include "common/phal_G4/rcc/rcc.h"
 #include "common/utils/countof.h"
+#include "common/rtos/rtos.h"
 #include "main.h"
 
 
 // Hmmm... something may go here
+#define LED_USER_PORT GPIOA
+#define LED_USER_PIN  5
 
 
 PHAL_GPIO_InitConfig_t gpio_config[] = {
     // Hmmm... something may go here
+    PHAL_GPIO_INIT_OUTPUT(LED_USER_PORT, LED_USER_PIN, GPIO_OUTPUT_HIGH_SPEED)
 };
 
 void HardFault_Handler();
