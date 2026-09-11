@@ -22,7 +22,12 @@ PHAL_GPIO_InitConfig_t gpio_config[] = {
 
 void HardFault_Handler();
 
+void heartbeat_LED() { PHAL_GPIO_toggle(LED_USER_PORT, LED_USER_PIN); }
+
 // Hmmm... something(s) may go here
+RTOS_DEFINE_TASK(heartbeat_LED, 800, TASK_PRIORITY_NORMAL, STACK_256);
+
+
 
 int main() {
     // NUCLEO-G474RE does not have an external oscillator so use the internal 16MHz HSI clock
@@ -33,6 +38,7 @@ int main() {
     }
 
     // Hmmm... something(s) may go here
+    RTOS_START_TASK(heartbeat_LED);
 
     return 0;
 }
